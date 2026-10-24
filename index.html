@@ -1,56 +1,527 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="id">
 <head>
-	<script type="text/javascript" src="main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Daihatsu TrackMyCar</title>
+  
+  <!-- PWA & Mobile Web App Meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#dc2626">
 
-	<!-- Add the CSS page -->
-	<link href="./style.css" type="text/css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f3f4f6;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom, 16px);
+    }
+    .pt-safe {
+      padding-top: env(safe-area-inset-top, 12px);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 </head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-<body>
-	<div class="bg">
-		<h2>Sample JS practice</h2><br>
-		<h4>Calling my simple javascript method.</h1>
-			<br>
-			<script>
-				let value = 'This is a string that I passed to JS function';
-				document.write(firstFunction(value));
-			</script>
-			<br>
-			I have completed printing the JS function value.
-			<br>
-			Adding an element to an array
-			<br>
-			<script>
-				let myList = ['item1', 'item2'];
-				document.write('Value of myList = ' + myList);
-			</script>
-			<br>
-			<script>
-				myList = addElement(myList,'item3');
-				document.write('After calling method = ' + myList);
-			</script>
-			<br>
-			Remove last item <br>
-			<script>
-				myList = removeElement(myList);
-				document.write('After calling removeMethod = ' + myList);
-			</script>
+  <!-- TOP HEADER -->
+  <header class="bg-gradient-to-r from-red-600 to-red-700 text-white pt-safe px-5 pb-6 rounded-b-3xl shadow-lg sticky top-0 z-30">
+    <!-- Status Bar Time & Connection Info -->
+    <div class="flex justify-between items-center text-xs opacity-80 mb-3 pt-1">
+      <span class="font-medium">9:41</span>
+      <div class="flex items-center gap-1.5">
+        <i class="fa-solid font-bold fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-xs"></i>
+      </div>
+    </div>
 
-		<h4>anonymouse function js examples</h4>
-		const cities = ['Orlando', 'Dubai', 'Edinburgh', 'Chennai', 'Accra', 'Denver', 'Eskisehir', 'Medellin', 'Yokohama'];
+    <!-- User & Brand Info -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center font-bold text-white shadow-inner">
+          BS
+        </div>
+        <div>
+          <p class="text-[10px] uppercase tracking-wider font-semibold text-red-100 opacity-90">DAIHATSU TRACKMYCAR</p>
+          <h1 class="text-lg font-bold leading-tight">Budi Santoso</h1>
+        </div>
+      </div>
+      
+      <!-- WA Live Status Badge -->
+      <button onclick="openTab('notif')" class="relative bg-white/20 hover:bg-white/30 backdrop-blur-md p-2.5 rounded-full border border-white/30 text-white transition-all active:scale-95">
+        <i class="fa-brands fa-whatsapp text-xl"></i>
+        <span class="absolute -top-1 -right-1 bg-emerald-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-red-600 animate-pulse">1</span>
+      </button>
+    </div>
+  </header>
 
-		//  Choose a method that will return undefined
-		cities.forEach(city => console.log('Have you visited ' + city + '?'));
+  <!-- MAIN CONTENT AREA AREA -->
+  <main class="flex-1 px-4 py-4 max-w-md mx-auto w-full pb-24">
 
-		<br>
-		<h4><a href="arrayfunctions.html">javascript array methods</a></h4>
-		<h4><a href="classes.html">javascript Classes</a></h4>
-		<h4><a href="images.html">HTML images</a></h4>
-		<h4><a href="sample.html">Sample HTML template</a></h4>
-		<h4><a href="githubsample.html">Revised github io link</a></h4>
+    <!-- TAB 1: HALAMAN UTAMA -->
+    <div id="tab-home" class="tab-content space-y-4">
+      
+      <!-- CAR CARD CONTAINER -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+        <div class="flex justify-between items-start mb-3">
+          <div>
+            <span class="inline-block bg-red-100 text-red-700 text-[10px] font-semibold px-2.5 py-0.5 rounded-full mb-1">
+              DAIHATSU SAHABATKU
+            </span>
+            <h2 class="text-base font-bold text-slate-800">Daihatsu Rocky ADS 1.2 CVT</h2>
+            <p class="text-xs text-slate-500">No SPK: <span class="font-mono font-medium text-slate-700">SPK-2026-001</span></p>
+          </div>
+        </div>
 
-	</div>
+        <!-- PROGRESS BAR -->
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 my-3">
+          <div class="flex justify-between items-center text-xs mb-1.5">
+            <span class="font-medium text-slate-600">Progres Pembelian</span>
+            <span class="font-bold text-red-600 text-sm">62%</span>
+          </div>
+          <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div class="bg-gradient-to-r from-red-500 to-red-600 h-full rounded-full transition-all duration-500" style="width: 62%;"></div>
+          </div>
+          <div class="flex justify-between items-center text-[11px] mt-2 text-slate-500">
+            <span>Estimasi Serah Terima:</span>
+            <span class="font-semibold text-slate-800 bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md border border-amber-200">28 Juni 2026</span>
+          </div>
+        </div>
+
+        <!-- CURRENT STATUS BADGE -->
+        <div class="flex items-center justify-between pt-1">
+          <span class="text-xs text-slate-500">Status Terakhir:</span>
+          <span class="bg-amber-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-gear animate-spin text-[10px]"></i>
+            PDI Proses
+          </span>
+        </div>
+      </div>
+
+      <!-- TAHAPAN JOURNEY QUICK LIST -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Tahapan Utama Journey</h3>
+          <span class="text-[11px] text-slate-400 font-medium">5 dari 8 Tahap</span>
+        </div>
+
+        <div class="space-y-2.5">
+          <!-- Step 1 -->
+          <div class="flex items-center justify-between p-2.5 bg-emerald-50 rounded-xl border border-emerald-100">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i>
+              <div>
+                <p class="text-xs font-semibold text-slate-800">SPK Dibuat</p>
+                <p class="text-[10px] text-slate-500">24 Juni 2026 • 1 Hari</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Selesai</span>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex items-center justify-between p-2.5 bg-emerald-50 rounded-xl border border-emerald-100">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i>
+              <div>
+                <p class="text-xs font-semibold text-slate-800">Pengajuan Leasing</p>
+                <p class="text-[10px] text-slate-500">25 Juni 2026 • 2 Hari</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Selesai</span>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex items-center justify-between p-2.5 bg-emerald-50 rounded-xl border border-emerald-100">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i>
+              <div>
+                <p class="text-xs font-semibold text-slate-800">Leasing Approved</p>
+                <p class="text-[10px] text-slate-500">27 Juni 2026 • 1 Hari</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Selesai</span>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex items-center justify-between p-2.5 bg-emerald-50 rounded-xl border border-emerald-100">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i>
+              <div>
+                <p class="text-xs font-semibold text-slate-800">Unit Tersedia</p>
+                <p class="text-[10px] text-slate-500">27 Juni 2026 • 2 Hari</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Selesai</span>
+          </div>
+
+          <!-- Step 5 (Active) -->
+          <div class="flex items-center justify-between p-2.5 bg-amber-50 rounded-xl border border-amber-200">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-spinner animate-spin text-amber-500 text-lg"></i>
+              <div>
+                <p class="text-xs font-bold text-amber-900">PDI Proses</p>
+                <p class="text-[10px] text-amber-700">28 Juni 2026 • Estimasi 1-2 hari</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold text-amber-800 bg-amber-200 px-2 py-0.5 rounded">Proses</span>
+          </div>
+        </div>
+
+        <button onclick="openTab('detail')" class="w-full mt-3 py-2 text-center text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 rounded-xl transition-colors">
+          Lihat Semua 8 Tahapan <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 2: PROGRESS DETAIL (TIMELINE) -->
+    <div id="tab-detail" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+        <h2 class="text-sm font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100 flex items-center justify-between">
+          <span>Detail Rangkaian Proses</span>
+          <span class="text-xs font-normal text-slate-500">SPK-2026-001</span>
+        </h2>
+
+        <!-- TIMELINE CONTAINER -->
+        <div class="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
+          
+          <!-- Item 1 -->
+          <div class="relative">
+            <span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] flex items-center justify-center font-bold ring-4 ring-white">
+              <i class="fa-solid fa-check"></i>
+            </span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <div class="flex justify-between items-start">
+                <h4 class="text-xs font-bold text-slate-800">1. SPK Dibuat</h4>
+                <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">24/06/2026</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-1">Surat Pemesanan Kendaraan berhasil dibuat oleh Sales.</p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="relative">
+            <span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] flex items-center justify-center font-bold ring-4 ring-white">
+              <i class="fa-solid fa-check"></i>
+            </span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <div class="flex justify-between items-start">
+                <h4 class="text-xs font-bold text-slate-800">2. Pengajuan Leasing</h4>
+                <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">25/06/2026</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-1">Berkas persyaratan sedang diverifikasi oleh pihak leasing.</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="relative">
+            <span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] flex items-center justify-center font-bold ring-4 ring-white">
+              <i class="fa-solid fa-check"></i>
+            </span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <div class="flex justify-between items-start">
+                <h4 class="text-xs font-bold text-slate-800">3. Leasing Approved</h4>
+                <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">27/06/2026</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-1">Aplikasi kredit disetujui oleh lembaga pembiayaan.</p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="relative">
+            <span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] flex items-center justify-center font-bold ring-4 ring-white">
+              <i class="fa-solid fa-check"></i>
+            </span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <div class="flex justify-between items-start">
+                <h4 class="text-xs font-bold text-slate-800">4. Unit Tersedia</h4>
+                <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">27/06/2026</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-1">Unit Daihatsu Rocky telah siap di stockyard dealer.</p>
+            </div>
+          </div>
+
+          <!-- Item 5 (Current) -->
+          <div class="relative">
+            <span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-amber-500 text-white text-[10px] flex items-center justify-center font-bold ring-4 ring-white">
+              <i class="fa-solid fa-spinner animate-spin"></i>
+            </span>
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+              <div class="flex justify-between items-start">
+                <h4 class="text-xs font-bold text-amber-900">5. PDI (Pre-Delivery Inspection)</h4>
+                <span class="text-[10px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">Hari Ini</span>
+              </div>
+              <p class="text-[11px] text-amber-800 mt-1">Unit sedang dalam pemeriksaan teknis akhir & pemasangan aksesoris.</p>
+            </div>
+          </div>
+
+          <!-- Item 6 (Pending) -->
+          <div class="relative opacity-50">
+            <span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-slate-300 text-slate-600 text-[10px] flex items-center justify-center font-bold ring-4 ring-white">6</span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <h4 class="text-xs font-bold text-slate-700">6. Pengiriman Unit</h4>
+              <p class="text-[11px] text-slate-400 mt-1">Persiapan towing & jadwal pengiriman ke alamat tujuan.</p>
+            </div>
+          </div>
+
+          <!-- Item 7 (Pending) -->
+          <div class="relative opacity-50">
+            <span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-slate-300 text-slate-600 text-[10px] flex items-center justify-center font-bold ring-4 ring-white">7</span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <h4 class="text-xs font-bold text-slate-700">7. STNK Diproses</h4>
+              <p class="text-[11px] text-slate-400 mt-1">Pengurusan pendaftaran plat nomor & STNK ke Samsat.</p>
+            </div>
+          </div>
+
+          <!-- Item 8 (Pending) -->
+          <div class="relative opacity-50">
+            <span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-slate-300 text-slate-600 text-[10px] flex items-center justify-center font-bold ring-4 ring-white">8</span>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <h4 class="text-xs font-bold text-slate-700">8. STNK & Unit Selesai</h4>
+              <p class="text-[11px] text-slate-400 mt-1">Serah terima lengkap mobil & dokumen resmi di rumah Anda.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: DOKUMEN SAYA -->
+    <div id="tab-dokumen" class="tab-content hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+        <h2 class="text-sm font-bold text-slate-800 mb-1">Dokumen Digital Anda</h2>
+        <p class="text-xs text-slate-500 mb-4">Unduh atau tinjau dokumen resmi pemesanan kendaraan</p>
+
+        <div class="space-y-2.5">
+          <!-- Doc 1 -->
+          <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-red-100 text-red-600 flex items-center justify-center">
+                <i class="fa-solid fa-file-pdf text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Surat Pemesanan (SPK)</p>
+                <p class="text-[10px] text-slate-500">PDF • 1.2 MB</p>
+              </div>
+            </div>
+            <button onclick="alert('Mengunduh Surat Pemesanan (SPK)...')" class="text-xs text-red-600 font-semibold hover:bg-red-50 p-2 rounded-lg transition-colors">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+
+          <!-- Doc 2 -->
+          <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                <i class="fa-solid fa-file-invoice text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Invoice Pembayaran</p>
+                <p class="text-[10px] text-slate-500">PDF • 850 KB</p>
+              </div>
+            </div>
+            <button onclick="alert('Mengunduh Invoice Pembayaran...')" class="text-xs text-blue-600 font-semibold hover:bg-blue-50 p-2 rounded-lg transition-colors">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+
+          <!-- Doc 3 -->
+          <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                <i class="fa-solid fa-receipt text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Tanda Terima Uang Muka</p>
+                <p class="text-[10px] text-slate-500">PDF • 620 KB</p>
+              </div>
+            </div>
+            <button onclick="alert('Mengunduh Tanda Terima...')" class="text-xs text-emerald-600 font-semibold hover:bg-emerald-50 p-2 rounded-lg transition-colors">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+
+          <!-- Doc 4 (Locked/Pending) -->
+          <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200 opacity-60">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-slate-200 text-slate-500 flex items-center justify-center">
+                <i class="fa-solid fa-file-contract text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-700">BAST (Serah Terima)</p>
+                <p class="text-[10px] text-slate-400">Tersedia saat penyerahan unit</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-lock text-slate-400 text-xs px-2"></i>
+          </div>
+
+          <!-- Doc 5 (Locked/Pending) -->
+          <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200 opacity-60">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-slate-200 text-slate-500 flex items-center justify-center">
+                <i class="fa-solid fa-id-card text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-700">STNK & BPKB Digital</p>
+                <p class="text-[10px] text-slate-400">Tersedia setelah STNK selesai</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-lock text-slate-400 text-xs px-2"></i>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: NOTIFIKASI & SIMULASI WHATSAPP -->
+    <div id="tab-notif" class="tab-content hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+          <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-emerald-500 text-lg"></i>
+            Notifikasi WhatsApp
+          </h2>
+          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full">Otomatis</span>
+        </div>
+
+        <div class="space-y-3">
+          <!-- WA Message Bubble 1 -->
+          <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl rounded-tl-none shadow-xs">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-bold text-emerald-900">Daihatsu Official Dealer</span>
+              <span class="text-[10px] text-slate-400">Hari Ini 10:30</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+              Halo <b>Budi Santoso</b>,<br>
+              Status pemesanan kendaraan Anda telah diperbarui menjadi:<br>
+              <span class="inline-block bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded my-1 text-[11px]">🔧 PDI Proses</span><br>
+              Unit sedang dalam tahap inspeksi kelayakan fisik dan aksesoris.<br>
+              <i>Estimasi Serah Terima: 28 Juni 2026</i>.
+            </p>
+          </div>
+
+          <!-- WA Message Bubble 2 -->
+          <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl rounded-tl-none shadow-xs">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-bold text-slate-800">Daihatsu Official Dealer</span>
+              <span class="text-[10px] text-slate-400">Kemarin 14:15</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Halo <b>Budi Santoso</b>,<br>
+              Kabar gembira! Unit kendaraan <b>Daihatsu Rocky ADS 1.2 CVT</b> Anda sudah <span class="font-semibold text-emerald-600">Tersedia di Dealer</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: BERI PENILAIAN -->
+    <div id="tab-rating" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 text-center">
+        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-3">
+          <i class="fa-solid fa-star text-xl"></i>
+        </div>
+        <h2 class="text-base font-bold text-slate-800">Bagaimana Pengalaman Anda?</h2>
+        <p class="text-xs text-slate-500 mt-1 mb-4">Berikan penilaian atas kepuasan proses layanan pemesanan unit hingga saat ini.</p>
+
+        <!-- Star Rating -->
+        <div class="flex justify-center gap-2 text-2xl text-amber-400 mb-5">
+          <i class="fa-solid fa-star cursor-pointer hover:scale-110 transition-transform"></i>
+          <i class="fa-solid fa-star cursor-pointer hover:scale-110 transition-transform"></i>
+          <i class="fa-solid fa-star cursor-pointer hover:scale-110 transition-transform"></i>
+          <i class="fa-solid fa-star cursor-pointer hover:scale-110 transition-transform"></i>
+          <i class="fa-solid fa-star cursor-pointer hover:scale-110 transition-transform"></i>
+        </div>
+
+        <textarea rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs focus:outline-none focus:ring-2 focus:ring-red-500 mb-4" placeholder="Tuliskan saran atau ulasan Anda (opsional)..."></textarea>
+
+        <button onclick="alert('Terima kasih atas penilaian dan ulasan Anda!')" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-3 rounded-xl shadow-md active:scale-95 transition-all">
+          Kirim Penilaian
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION BAR -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-3 py-2 z-40 pb-safe shadow-lg">
+    <div class="max-w-md mx-auto grid grid-cols-5 gap-1 text-center">
+      
+      <button onclick="openTab('home')" id="nav-home" class="nav-item text-red-600 flex flex-col items-center py-1 transition-colors">
+        <i class="fa-solid fa-house text-lg mb-0.5"></i>
+        <span class="text-[10px] font-bold">Utama</span>
+      </button>
+
+      <button onclick="openTab('detail')" id="nav-detail" class="nav-item text-slate-400 hover:text-slate-600 flex flex-col items-center py-1 transition-colors">
+        <i class="fa-solid fa-list-check text-lg mb-0.5"></i>
+        <span class="text-[10px] font-medium">Detail</span>
+      </button>
+
+      <button onclick="openTab('dokumen')" id="nav-dokumen" class="nav-item text-slate-400 hover:text-slate-600 flex flex-col items-center py-1 transition-colors">
+        <i class="fa-solid fa-folder-open text-lg mb-0.5"></i>
+        <span class="text-[10px] font-medium">Dokumen</span>
+      </button>
+
+      <button onclick="openTab('notif')" id="nav-notif" class="nav-item text-slate-400 hover:text-slate-600 flex flex-col items-center py-1 transition-colors relative">
+        <i class="fa-solid fa-bell text-lg mb-0.5"></i>
+        <span class="text-[10px] font-medium">Notif</span>
+        <span class="absolute top-1 right-3 w-2 h-2 bg-red-600 rounded-full"></span>
+      </button>
+
+      <button onclick="openTab('rating')" id="nav-rating" class="nav-item text-slate-400 hover:text-slate-600 flex flex-col items-center py-1 transition-colors">
+        <i class="fa-solid fa-star text-lg mb-0.5"></i>
+        <span class="text-[10px] font-medium">Ulasan</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- JS TAB NAVIGATION FUNCTION -->
+  <script>
+    function openTab(tabName) {
+      // Hide all contents
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+      });
+
+      // Reset nav button states
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.classList.remove('text-red-600', 'font-bold');
+        btn.classList.add('text-slate-400', 'font-medium');
+      });
+
+      // Show targeted tab
+      document.getElementById('tab-' + tabName).classList.remove('hidden');
+
+      // Highlight active nav button
+      const activeNav = document.getElementById('nav-' + tabName);
+      if (activeNav) {
+        activeNav.classList.remove('text-slate-400', 'font-medium');
+        activeNav.classList.add('text-red-600', 'font-bold');
+      }
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+  </script>
 </body>
-
 </html>
